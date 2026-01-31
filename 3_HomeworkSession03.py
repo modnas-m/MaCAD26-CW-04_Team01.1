@@ -84,9 +84,12 @@ def create_module(geometry, num, designer, z_shift=0):
     if z_shift:
         for elem in geom:
             shift_z_recursive(elem, z_shift)
-    # Add Designer property to each BrepX element
+    # Add Designer property to each BrepX element and its properties dict
     for elem in geom:
         elem.Designer = designer
+        if hasattr(elem, "properties") and isinstance(elem.properties, dict):
+            elem.properties["Designer"] = designer
+            elem.properties["Module"] = f"{num:02d}"
     m = Base()
     m.speckle_type = "Speckle.Core.Models.Collections.Collection"
     m.name = f"Module_{num:02d}"
