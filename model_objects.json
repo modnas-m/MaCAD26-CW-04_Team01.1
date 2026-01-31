@@ -1,0 +1,177 @@
+{
+  "project_id": "128262a20c",
+  "model_id": "462681993b",
+  "version_id": "b269dfe189",
+  "version_message": "Duplicated object 86072c0d-715b-46fe-8785-a83cdc144e58 with X offset 20.0",
+  "graphql_info": {
+    "project": {
+      "id": "128262a20c",
+      "name": "CW26-Sessions",
+      "version": {
+        "id": "b269dfe189",
+        "message": "Duplicated object 86072c0d-715b-46fe-8785-a83cdc144e58 with X offset 20.0",
+        "createdAt": "2026-01-25T06:13:02.111Z",
+        "referencedObject": "39d7c96494bba32ba1b615bebf24cc05"
+      }
+    }
+  },
+  "objects": [
+    {
+      "id": "39d7c96494bba32ba1b615bebf24cc05",
+      "speckle_type": "Speckle.Core.Models.Collections.Collection",
+      "applicationId": null,
+      "name": "Team01.1_session03.3dm",
+      "depth": 0,
+      "properties": {
+        "units": "m",
+        "name": "Team01.1_session03.3dm",
+        "processed_by": "Tower Teachers Script",
+        "analysis_date": "2026-01-18",
+        "version": 3,
+        "custom_property": "Hello from specklepy!",
+        "totalChildrenCount": 0,
+        "id": "39d7c96494bba32ba1b615bebf24cc05",
+        "speckle_type": "Speckle.Core.Models.Collections.Collection"
+      }
+    },
+    {
+      "id": "8cfc292266ddd180dca26c6f994502bd",
+      "speckle_type": "Speckle.Core.Models.Collections.Collection:Speckle.Core.Models.Layer",
+      "applicationId": "522184e3-1a71-4c01-b283-aa9bcced101f",
+      "name": "Project CW26-Sessions: Model homework/session02/team_01.3",
+      "depth": 1,
+      "properties": {
+        "name": "Project CW26-Sessions: Model homework/session02/team_01.3",
+        "applicationId": "522184e3-1a71-4c01-b283-aa9bcced101f",
+        "totalChildrenCount": 0,
+        "id": "8cfc292266ddd180dca26c6f994502bd",
+        "speckle_type": "Speckle.Core.Models.Collections.Collection:Speckle.Core.Models.Layer",
+        "custom_tag": "Element_000",
+        "element_index": 0
+      }
+    },
+    {
+      "id": "457b02b143354a863785020d6087309e",
+      "speckle_type": "Speckle.Core.Models.Collections.Collection:Speckle.Core.Models.Layer",
+      "applicationId": "f2f3416f-23bf-4d22-801c-e53e31d44ad1",
+      "name": "Grasshopper Model",
+      "depth": 2,
+      "properties": {
+        "name": "Grasshopper Model",
+        "totalChildrenCount": 0,
+        "applicationId": "f2f3416f-23bf-4d22-801c-e53e31d44ad1",
+        "speckle_type": "Speckle.Core.Models.Collections.Collection:Speckle.Core.Models.Layer",
+        "id": "457b02b143354a863785020d6087309e"
+      }
+    },
+    {
+      "id": "69c06e290a00198dcd10080703717961",
+      "speckle_type": "Speckle.Core.Models.Collections.Collection:Speckle.Core.Models.Layer",
+      "applicationId": "5263d00d-3cbb-4c28-b35e-185c6f4ac825",
+      "name": "Old_Modules",
+      "depth": 3,
+      "properties": {
+        "name": "Old_Modules",
+        "totalChildrenCount": 0,
+        "applicationId": "5263d00d-3cbb-4c28-b35e-185c6f4ac825",
+        "speckle_type": "Speckle.Core.Models.Collections.Collection:Speckle.Core.Models.Layer",
+        "id": "69c06e290a00198dcd10080703717961"
+      }
+    },
+    {
+      "id": "57cb1a45581951ca6efdf0d10c33c283",
+      "speckle_type": "Objects.Geometry.BrepX",
+      "applicationId": "dbec9733-ab6b-4091-aebb-73cfae081776",
+      "name": null,
+      "depth": 4,
+      "properties": {
+        "units": "m",
+        "applicationId": "dbec9733-ab6b-4091-aebb-73cfae081776",
+        "area": 1319.8672315959714,
+        "properties": {
+          "Module": "01",
+          "Designer": "Maria Sanchez Dominguez"
+        },
+        "totalChildrenCount": 0,
+        "id": "57cb1a45581951ca6efdf0d10c33c283",
+        "speckle_type": "Objects.Geometry.BrepX",
+        "volume": 3428.3185296581496
+      }
+    },
+    {
+      "id": "db1f209e4babbc800150b8951ee6886e",
+      "speckle_type": "Objects.Geometry.BrepX",
+      "applicationId": "076f0801-eb85-497e-a24d-5f93343dbcaf",
+      "name": null,
+      "depth": 4,
+      "properties": {
+        "units": "m",
+        "applicationId": "076f0801-eb85-497e-a24d-5f93343dbcaf",
+        "area": 1319.8672315959716,
+        "properties": {
+          "Module": "03",
+          "Designer": "Emilie El Chidiac"
+        },
+        "totalChildrenCount": 0,
+        "id": "db1f209e4babbc800150b8951ee6886e",
+        "speckle_type": "Objects.Geometry.BrepX",
+        "volume": 3428.3185296581523
+      }
+    },
+    {
+      "id": "be9e30af4da2266cdd369c97e8359ce6",
+      "speckle_type": "Speckle.Core.Models.Collections.Collection:Speckle.Core.Models.Layer",
+      "applicationId": "c71a0b5a-cddc-4e13-ac3a-89752bdc7451",
+      "name": "New_Modules",
+      "depth": 3,
+      "properties": {
+        "name": "New_Modules",
+        "totalChildrenCount": 0,
+        "applicationId": "c71a0b5a-cddc-4e13-ac3a-89752bdc7451",
+        "speckle_type": "Speckle.Core.Models.Collections.Collection:Speckle.Core.Models.Layer",
+        "id": "be9e30af4da2266cdd369c97e8359ce6"
+      }
+    },
+    {
+      "id": "2f7b2a301f083a79ba32bddd4f51005d",
+      "speckle_type": "Objects.Geometry.BrepX",
+      "applicationId": "86072c0d-715b-46fe-8785-a83cdc144e58",
+      "name": null,
+      "depth": 4,
+      "properties": {
+        "units": "m",
+        "applicationId": "86072c0d-715b-46fe-8785-a83cdc144e58",
+        "area": 1319.867231595971,
+        "properties": {
+          "Module": "02",
+          "Designer": "Lakzhmy Mari Zaro"
+        },
+        "totalChildrenCount": 0,
+        "id": "2f7b2a301f083a79ba32bddd4f51005d",
+        "speckle_type": "Objects.Geometry.BrepX",
+        "volume": 3428.318529658151
+      }
+    },
+    {
+      "id": "243829e38b61abd61924be4a8e42b9cd",
+      "speckle_type": "Base",
+      "applicationId": "34b79c1a-3a91-4975-bb47-7b674002f355",
+      "name": "Object_Copy",
+      "depth": 1,
+      "properties": {
+        "units": "m",
+        "name": "Object_Copy",
+        "applicationId": "34b79c1a-3a91-4975-bb47-7b674002f355",
+        "area": 1319.867231595971,
+        "properties": {
+          "Module": "02",
+          "Designer": "Lakzhmy Mari Zaro"
+        },
+        "totalChildrenCount": 0,
+        "id": "243829e38b61abd61924be4a8e42b9cd",
+        "speckle_type": "Base",
+        "volume": 3428.318529658151
+      }
+    }
+  ]
+}
