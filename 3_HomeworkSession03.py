@@ -79,25 +79,17 @@ def create_collection(name, elements):
     return c
 
 
-def create_module(geometry, num, designer, z_shift=0):
-    geom = copy.deepcopy(geometry)
+def create_brep_with_props(geometry, num, designer, z_shift=0):
+    geom = copy.deepcopy(geometry[0])  # Get the single BrepX
     if z_shift:
-        for elem in geom:
-            shift_z_recursive(elem, z_shift)
-    # Add Designer property to each BrepX element and its properties dict
-    for elem in geom:
-        elem.Designer = designer
-        if hasattr(elem, "properties") and isinstance(elem.properties, dict):
-            elem.properties["Designer"] = designer
-            elem.properties["Module"] = f"{num:02d}"
-    m = Base()
-    m.speckle_type = "Speckle.Core.Models.Collections.Collection"
-    m.name = f"Module_{num:02d}"
-    m.collectionType = "Module"
-    m.elements = geom
-    m.Module = f"{num:02d}"
-    m.Designer = designer
-    return m
+        shift_z_recursive(geom, z_shift)
+    # Add Designer property to BrepX and its properties dict
+    geom.Designer = designer
+    geom.Module = f"{num:02d}"
+    if hasattr(geom, "properties") and isinstance(geom.properties, dict):
+        geom.properties["Designer"] = designer
+        geom.properties["Module"] = f"{num:02d}"
+    return geom
 
 
 def main():
@@ -118,16 +110,22 @@ def main():
         print(f"ERROR: Geometry {TARGET_GEOMETRY_ID} not found")
         return
 
-    module_01 = create_module(source_geometry, 1, DESIGNERS[0])
-    module_02 = create_module(source_geometry, 2, DESIGNERS[1], Z_OFFSET)
-    module_03 = create_module(source_geometry, 3, DESIGNERS[2], Z_OFFSET * 2)
+    # Create BrepX elements with properties for each module
+    brep_01 = create_brep_with_props(source_geometry, 1, DESIGNERS[0])
+    brep_02 = create_brep_with_props(source_geometry, 2, DESIGNERS[1], Z_OFFSET)
+    brep_03 = create_brep_with_props(source_geometry, 3, DESIGNERS[2], Z_OFFSET * 2)
+
+    # Old_Modules contains BrepX from Module_01 and Module_03
+    # New_Modules contains BrepX from Module_02
+    old_modules = create_collection("Old_Modules", [brep_01, brep_03])
+    new_modules = create_collection("New_Modules", [brep_02])
 
     root = Base()
     root.speckle_type = "Speckle.Core.Models.Collections.Collection"
     root.name = "Tower"
     root.collectionType = "Tower"
     root.Tower = "Team-01.1"
-    root.elements = [create_collection("Old_Modules", [module_01]), create_collection("New_Modules", [module_02, module_03])]
+    root.elements = [old_modules, new_modules]
     root.units = "mm"
 
     new_obj_id = operations.send(base=root, transports=[transport])
