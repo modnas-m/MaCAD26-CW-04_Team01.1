@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(dir \"C:\\\\Users\\\\Lakzhmy\\\\IaaC BIMSC Repo\\\\Team_01.1-Session03\")"
+      "Bash(dir \"C:\\\\Users\\\\Lakzhmy\\\\IaaC BIMSC Repo\\\\Team_01.1-Session03\")",
+      "Bash(.venv/Scripts/python:*)",
+      "Bash(ls:*)"
     ]
   }
 }
