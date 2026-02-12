@@ -7,13 +7,14 @@ from a specified project and object ID, then saves it to a JSON file.
 
 import json
 import os
-from main import get_client
+from specklepy.api.client import SpeckleClient
+from specklepy.api.credentials import get_default_account
 from gql import gql
 
 
 # TODO: Replace with your project and object IDs
-PROJECT_ID = "a2d4f63c4b"
-OBJECT_ID = "89bac5c2e9c810422539cde258111990"
+PROJECT_ID = "08c875bbe4" # HB01 Program Model
+OBJECT_ID = "e8f99c85381ab75aecba9c741f8a21c2" #Object id for one of the meshes
 
 
 def query_object_data_graphql(client, project_id: str, object_id: str) -> dict:
@@ -55,7 +56,9 @@ def main():
     Main function to fetch object data and save to JSON file.
     """
     # Authenticate with Speckle
-    client = get_client()
+    account = get_default_account()
+    client = SpeckleClient(host=account.serverInfo.url)
+    client.authenticate_with_account(account)
     print(f"✓ Authenticated with Speckle")
     
     # Execute GraphQL query

@@ -1,0 +1,77 @@
+{
+  "projectId": "08c875bbe4",
+  "objectId": "e8f99c85381ab75aecba9c741f8a21c2",
+  "data": {
+    "id": "e8f99c85381ab75aecba9c741f8a21c2",
+    "area": 438572.28546504304,
+    "bbox": null,
+    "name": "",
+    "faces": [
+      {
+        "__closure": null,
+        "referencedId": "a95a8d08656eefcd1efd60aa739436a7",
+        "speckle_type": "reference"
+      },
+      {
+        "__closure": null,
+        "referencedId": "21b344853a051153560b7a5bc6636fd2",
+        "speckle_type": "reference"
+      }
+    ],
+    "units": "m",
+    "colors": [],
+    "volume": 632110.9800834128,
+    "vertices": [
+      {
+        "__closure": null,
+        "referencedId": "03b0190582be8cb3ecc34aa7554c65ea",
+        "speckle_type": "reference"
+      },
+      {
+        "__closure": null,
+        "referencedId": "b1afb0d68b4fabaf25be3e5d66e52fa4",
+        "speckle_type": "reference"
+      }
+    ],
+    "__closure": {
+      "03b0190582be8cb3ecc34aa7554c65ea": 1,
+      "070fbaae392c8bf73c48f962d9271537": 1,
+      "0e27094fc37206c3b1f10f927a711d47": 1,
+      "21b344853a051153560b7a5bc6636fd2": 1,
+      "3c84a6eaa1a247eb3d14dc0073a3d28f": 1,
+      "94a8e96ab0257880eff89b5cb63db97a": 1,
+      "a95a8d08656eefcd1efd60aa739436a7": 1,
+      "b1afb0d68b4fabaf25be3e5d66e52fa4": 1
+    },
+    "properties": {
+      "name": "APPARTMENT",
+      "index": "pr_03"
+    },
+    "speckle_type": "Objects.Geometry.Mesh",
+    "applicationId": "545f529a-7292-4fde-89b7-0374f2538ac9",
+    "vertexNormals": [
+      {
+        "__closure": null,
+        "referencedId": "94a8e96ab0257880eff89b5cb63db97a",
+        "speckle_type": "reference"
+      },
+      {
+        "__closure": null,
+        "referencedId": "3c84a6eaa1a247eb3d14dc0073a3d28f",
+        "speckle_type": "reference"
+      }
+    ],
+    "textureCoordinates": [
+      {
+        "__closure": null,
+        "referencedId": "0e27094fc37206c3b1f10f927a711d47",
+        "speckle_type": "reference"
+      },
+      {
+        "__closure": null,
+        "referencedId": "070fbaae392c8bf73c48f962d9271537",
+        "speckle_type": "reference"
+      }
+    ]
+  }
+}
