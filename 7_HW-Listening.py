@@ -161,8 +161,8 @@ async def subscribe_and_backup():
 
     try:
         async with ws_client as session:
-            print(f"🔌 Connected (WS) to {SPECKLE_SERVER_WS}")
-            print(f"📡 Listening for updates on project: {PROJECT_ID}")
+            print(f"Connected (WS) to {SPECKLE_SERVER_WS}")
+            print(f"Listening for updates on project: {PROJECT_ID}")
             print("Press Ctrl+C to stop\n")
 
             async for result in session.subscribe(
@@ -180,12 +180,9 @@ async def subscribe_and_backup():
                 model_id = evt.get("modelId")
                 event_type = evt.get("type")
 
-                if not version_id:
-                    print("⚠ Update received but no version.id found; skipping.")
-                    continue
 
                 print("=" * 60)
-                print("📦 Update received")
+                print("Update received")
                 print(f"  - modelId: {model_id}")
                 print(f"  - versionId: {version_id}")
                 print(f"  - type: {event_type}")
