@@ -16,7 +16,7 @@ load_dotenv()
 
 # Your Speckle token
 YOUR_TOKEN =  os.environ.get("SPECKLE_TOKEN")
-PROJECT_ID = "a2d4f63c4b"
+PROJECT_ID = "08c875bbe4"  # HB01 Program Model
 
 # Define the subscription query
 subscription_query = gql("""
