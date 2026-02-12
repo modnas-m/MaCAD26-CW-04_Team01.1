@@ -11,11 +11,12 @@
 import asyncio
 import json
 import os
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 from dotenv import load_dotenv
 from gql import gql, Client
 from gql.transport.websockets import WebsocketsTransport
+from gql.transport.requests import RequestsHTTPTransport
 
 from specklepy.api.client import SpeckleClient
 
@@ -28,7 +29,7 @@ SPECKLE_SERVER_HTTP = "https://app.speckle.systems"
 SPECKLE_SERVER_WS = "wss://app.speckle.systems/graphql"
 
 YOUR_TOKEN = os.environ.get("SPECKLE_TOKEN")
-PROJECT_ID = "08c875bbe4"  # HB01 Program Model (project)
+PROJECT_ID = "128262a20c"  # Test model to generate easy versions for the listening function
 
 # Where backups go (relative to this script)
 BACKUP_DIRNAME = "speckle_backups"
@@ -65,7 +66,6 @@ query GetVersionRootObject($projectId: String!, $versionId: String!) {
       authorUser {
         id
         name
-        email
       }
     }
   }
@@ -99,7 +99,10 @@ def _ensure_backup_dir(script_dir: str) -> str:
 
 def _write_backup_json(script_dir: str, payload: dict, received_at: datetime) -> str:
     backup_dir = _ensure_backup_dir(script_dir)
-    filename = f"{_safe_timestamp(received_at)}.json"
+    # Convert UTC to CET (UTC+1)
+    cet = timezone(timedelta(hours=1))
+    received_at_cet = received_at.astimezone(cet)
+    filename = f"{_safe_timestamp(received_at_cet)}.json"
     filepath = os.path.join(backup_dir, filename)
 
     with open(filepath, "w", encoding="utf-8") as f:
@@ -107,29 +110,32 @@ def _write_backup_json(script_dir: str, payload: dict, received_at: datetime) ->
 
     return filepath
 
-def _speckle_http_client() -> SpeckleClient:
+def _speckle_http_client() -> Client:
     if not YOUR_TOKEN:
         raise RuntimeError("Missing SPECKLE_TOKEN in your environment (.env).")
 
-    client = SpeckleClient(host=SPECKLE_SERVER_HTTP)
-    client.authenticate_with_token(YOUR_TOKEN)
-    return client
-
-def _get_version_root_object_and_author(http_client: SpeckleClient, project_id: str, version_id: str) -> dict:
-    res = http_client.execute_query(
-        Q_VERSION_REFERENCED_OBJECT,
-        {"projectId": project_id, "versionId": version_id},
+    transport = RequestsHTTPTransport(
+        url=f"{SPECKLE_SERVER_HTTP}/graphql",
+        headers={"Authorization": f"Bearer {YOUR_TOKEN}"},
     )
-    # SpeckleClient.execute_query returns the "data dict" directly
+    return Client(transport=transport, fetch_schema_from_transport=False)
+
+def _get_version_root_object_and_author(http_client: Client, project_id: str, version_id: str) -> dict:
+    query = gql(Q_VERSION_REFERENCED_OBJECT)
+    res = http_client.execute(
+        query,
+        variable_values={"projectId": project_id, "versionId": version_id},
+    )
     ver = res["project"]["version"]
     if not ver or not ver.get("referencedObject"):
         raise RuntimeError(f"Could not resolve referencedObject for version {version_id}")
     return ver
 
-def _get_object_data(http_client: SpeckleClient, project_id: str, object_id: str) -> dict:
-    res = http_client.execute_query(
-        Q_OBJECT_DATA,
-        {"projectId": project_id, "objectId": object_id},
+def _get_object_data(http_client: Client, project_id: str, object_id: str) -> dict:
+    query = gql(Q_OBJECT_DATA)
+    res = http_client.execute(
+        query,
+        variable_values={"projectId": project_id, "objectId": object_id},
     )
     obj = res["project"]["object"]
     if not obj or "data" not in obj:
@@ -143,10 +149,8 @@ def _get_object_data(http_client: SpeckleClient, project_id: str, object_id: str
 async def subscribe_and_backup():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     http_client = _speckle_http_client()
-    me = getattr(getattr(http_client, "account", None), "userInfo", None)
 
-    print("✓ HTTP client authenticated"
-          + (f" as {me.name}" if me and getattr(me, "name", None) else ""))
+    print("✓ HTTP client authenticated")
 
     transport = WebsocketsTransport(
         url=SPECKLE_SERVER_WS,
@@ -209,7 +213,6 @@ async def subscribe_and_backup():
                         "author": {
                             "id": author.get("id"),
                             "name": author.get("name"),
-                            "email": author.get("email"),
                         },
                         "object": {
                             "id": obj.get("id"),

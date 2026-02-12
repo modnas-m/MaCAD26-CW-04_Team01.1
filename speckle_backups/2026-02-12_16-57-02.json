@@ -1,0 +1,46 @@
+{
+  "projectId": "128262a20c",
+  "modelId": "15d75b29a8",
+  "versionId": "b2d2401be8",
+  "rootObjectId": "0855afdee0cc3ce9c02d018f2b28ff61",
+  "commitMessage": null,
+  "createdAt": "2026-02-12T15:57:02.601Z",
+  "receivedAt": "2026-02-12T15:57:02.521169+00:00",
+  "author": {
+    "id": "8c651ddea3",
+    "name": "María Sánchez i Domínguez"
+  },
+  "object": {
+    "id": "0855afdee0cc3ce9c02d018f2b28ff61",
+    "speckleType": "Speckle.Core.Models.Collections.Collection:Speckle.Core.Models.Collections.RootCollection",
+    "data": {
+      "id": "0855afdee0cc3ce9c02d018f2b28ff61",
+      "name": "Grasshopper Model",
+      "version": 3,
+      "elements": [
+        {
+          "__closure": null,
+          "referencedId": "349f929d46f9715da0d5f4b7ca61a8d9",
+          "speckle_type": "reference"
+        }
+      ],
+      "__closure": {
+        "14e71691f2b269cfa856b14cc1afefb7": 4,
+        "27a36dc6be652340a63e1e8828bc1963": 2,
+        "349f929d46f9715da0d5f4b7ca61a8d9": 1,
+        "4c3a219e1e91d74c2e645f6bc7276884": 4,
+        "c2cd307115a48ebabc8f7c25e5b3dc3f": 3,
+        "deedc2889f9522fc0a802d72aee4c789": 4,
+        "e4b84cc25333e674e265a21f157af0f0": 3,
+        "ec3ad82dc971405064e0c7cb560be3cc": 4
+      },
+      "properties": {},
+      "colorProxies": [],
+      "speckle_type": "Speckle.Core.Models.Collections.Collection:Speckle.Core.Models.Collections.RootCollection",
+      "applicationId": "0728b656-d4e2-4bb4-9a44-5ae8576cfc23",
+      "collectionType": null,
+      "renderMaterialProxies": [],
+      "instanceDefinitionProxies": []
+    }
+  }
+}
