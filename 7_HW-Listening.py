@@ -18,8 +18,6 @@ from gql import gql, Client
 from gql.transport.websockets import WebsocketsTransport
 from gql.transport.requests import RequestsHTTPTransport
 
-from specklepy.api.client import SpeckleClient
-
 # -----------------------
 # Config
 # -----------------------
@@ -85,7 +83,7 @@ query GetObjectData($projectId: String!, $objectId: String!) {
 """
 
 # -----------------------
-# Helpers
+# Helpers (copilot thought of these and they're very useful to know what's wrong in case something fails)
 # -----------------------
 
 def _safe_timestamp(dt: datetime) -> str:
@@ -147,6 +145,7 @@ def _get_object_data(http_client: Client, project_id: str, object_id: str) -> di
 # -----------------------
 
 async def subscribe_and_backup():
+    #Figures out where the script is saved on disk (so it knows where to write the backup files), and creates the HTTP client for making GraphQL queries.
     script_dir = os.path.dirname(os.path.abspath(__file__))
     http_client = _speckle_http_client()
 
@@ -158,7 +157,7 @@ async def subscribe_and_backup():
     )
 
     ws_client = Client(transport=transport, fetch_schema_from_transport=False)
-
+        #Sets up and opens a persistent WebSocket connection to Speckle. async with means it will automatically close the connection when the script stops.
     try:
         async with ws_client as session:
             print(f"Connected (WS) to {SPECKLE_SERVER_WS}")
@@ -166,6 +165,7 @@ async def subscribe_and_backup():
             print("Press Ctrl+C to stop\n")
 
             async for result in session.subscribe(
+                #Sits and waits. Every time Speckle sends a new version update, the code inside this loop runs once for that update.
                 SUB_PROJECT_VERSIONS_UPDATED,
                 variable_values={"projectId": PROJECT_ID},
             ):
@@ -179,7 +179,7 @@ async def subscribe_and_backup():
                 created_at = ver_meta.get("createdAt")
                 model_id = evt.get("modelId")
                 event_type = evt.get("type")
-
+                #Pulls out the useful bits from whatever Speckle sent: the version ID, model ID, message, etc.
 
                 print("=" * 60)
                 print("Update received")
@@ -197,6 +197,7 @@ async def subscribe_and_backup():
 
                     # 2) Fetch object.data
                     obj = _get_object_data(http_client, PROJECT_ID, root_object_id)
+                    #The subscription only sends lightweight metadata, so here it makes two follow-up HTTP requests to get the actual object data for that version.
 
                     # 3) Build backup payload
                     backup_payload = {
@@ -217,6 +218,7 @@ async def subscribe_and_backup():
                             "data": obj.get("data"),
                         },
                     }
+                    #Bundles everything into one dict and writes it to a timestamped JSON file on disk.¡
 
                     # 4) Write timestamped file
                     outpath = _write_backup_json(script_dir, backup_payload, received_at)
@@ -224,12 +226,13 @@ async def subscribe_and_backup():
 
                 except Exception as e:
                     print(f"❌ Backup failed for version {version_id}: {e}")
+                    #If anything in steps 5 or 6 goes wrong, it prints the error and then just continues waiting for the next update, it doesn't crash the whole script.
 
     except KeyboardInterrupt:
-        print("\n👋 Subscription stopped by user")
+        print("\n Subscription stopped by user")
     finally:
         await transport.close()
-        print("🔌 Connection closed")
+        print("Connection closed")
 
 if __name__ == "__main__":
     asyncio.run(subscribe_and_backup())
